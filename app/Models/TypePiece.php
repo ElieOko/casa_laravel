@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\MaisonTypePiece;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class TypePiece extends Model
 {
@@ -13,4 +15,8 @@ class TypePiece extends Model
         "nom",
         "description"
     ];
+    public function maison_type_piece(): HasMany
+    {
+        return $this->hasMany(MaisonTypePiece::class);
+    }
 }

@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Bailleur extends Model
 {
@@ -18,5 +20,8 @@ class Bailleur extends Model
         'image_profil',
         'user_id'
     ];
-    
+    public function user() : BelongsTo
+    {
+        return $this->belongsTo(User::class,'user_id','id');
+    }
 }

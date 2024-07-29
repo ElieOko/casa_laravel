@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Maison;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class CertificationMaison extends Model
 {
@@ -13,5 +15,8 @@ class CertificationMaison extends Model
         'maison_id',
         'certified'
     ];
-
+    public function maison() : BelongsTo
+    {
+        return $this->belongsTo(Maison::class,'maison_id','id');
+    }
 }

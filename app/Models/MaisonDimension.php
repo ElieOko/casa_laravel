@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Maison;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class MaisonDimension extends Model
 {
@@ -14,4 +16,8 @@ class MaisonDimension extends Model
         'largeur',
         'longueur'
     ];
+    public function maison() : BelongsTo
+    {
+        return $this->belongsTo(Maison::class,'maison_id','id');
+    }
 }
