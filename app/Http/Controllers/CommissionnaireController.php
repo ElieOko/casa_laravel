@@ -30,19 +30,33 @@ class CommissionnaireController extends Controller
      */
     public function store(Request $request)
     {
+        $data['error'] = null ;
+        $data['sys']   = "" ;
         $validator = Validator::make($request->all(),[
             'nom_famille' => 'required|string',
             'prenom' => 'required|string',
             'genre' => 'required|string',
             'telephone' => 'string',
             'date_naissance' => 'string',
-            'image_profil'=> 'string'
+            'user_id' => 'int'
         ]);
 
-        if($validator->stopOnFirstFailure()->fails()) {
-            // $validator
+        if(!$validator->stopOnFirstFailure()->fails()) {
+            $validated = $validator->validated();
+            $commissionnaire = Commissionnaire::updateOrCreate([
+            'nom_famille' => $validated['nom_famille'],
+            'prenom' => $validated['prenom'],
+            'genre' => $validated['genre'],
+            'telephone' => $validated['telephone'],
+            'date_naissance' => $validated['date_naissance'],
+            'user_id' => $validated['user_id']
+            ]);
+            $data['sys'] = $commissionnaire;
+            return $data;
         }
-        $validated = $validator->validated();
+
+        $data['error']= $validator->errors()??"";
+        return $data;
     }
 
     /**

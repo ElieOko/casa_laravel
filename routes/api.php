@@ -21,8 +21,9 @@ Route::get('bailleur/desactive', [BailleurController::class, 'desactive']);
  
 Route::post('user/register', [UserController::class, 'register']);
 Route::middleware(['auth:sanctum'])->group(function () {
+    
     Route::resource('bailleur', BailleurController::class)
-        ->only(['index', 'show','edit','store']);
+        ->only(['index', 'show','edit']);
 
     Route::resource('commissionnaire', CommissionnaireController::class)
         ->only(['index', 'show','edit']);
