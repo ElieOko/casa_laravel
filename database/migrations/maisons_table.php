@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->nullable()->index();
             $table->foreignId('maison_type_id')->nullable()->index();
             $table->foreignId('material_build_id')->nullable()->index();
+            $table->foreignId('type_architectural_id')->nullable()->index();
             $table->decimal('prix',15,4);
             $table->integer('piece')->default(1);
             $table->timestamps();
