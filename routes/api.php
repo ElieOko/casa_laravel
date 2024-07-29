@@ -20,8 +20,9 @@ use App\Http\Controllers\MaisonZoneGeographiqueController;
 Route::get('bailleur/desactive', [BailleurController::class, 'desactive']);
  
 Route::post('user/register', [UserController::class, 'register']);
+Route::post('user/login', [UserController::class, 'login']);
 Route::middleware(['auth:sanctum'])->group(function () {
-    
+
     Route::resource('bailleur', BailleurController::class)
         ->only(['index', 'show','edit']);
 
