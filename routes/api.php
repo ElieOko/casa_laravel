@@ -13,15 +13,20 @@ use App\Http\Controllers\UserSatisfactionController;
 use App\Http\Controllers\ReservationMaisonController;
 use App\Http\Controllers\TypeArchitecturalController;
 use App\Http\Controllers\CertificationMaisonController;
+use App\Http\Controllers\MaisonTypeController;
 use App\Http\Controllers\MateriauxConstructionController;
 use App\Http\Controllers\MaisonZoneGeographiqueController;
-
+use App\Http\Controllers\UserTypeController;
 
 Route::get('bailleur/desactive', [BailleurController::class, 'desactive']);
- 
 Route::post('user/register', [UserController::class, 'register']);
 Route::post('user/login', [UserController::class, 'login']);
+Route::post('user/type', [UserTypeController::class, 'store']);
+Route::get('user', [UserController::class, 'index']);
 Route::middleware(['auth:sanctum'])->group(function () {
+    // Route::get('user', [UserController::class, 'index']);
+    // Route::resource('user', UserController::class)
+    //     ->only(['index']);
 
     Route::resource('bailleur', BailleurController::class)
         ->only(['index', 'show','edit']);
@@ -44,6 +49,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::resource('maison.certification', CertificationMaisonController::class)
         ->only(['index', 'show', 'store','edit']);  
     
+    Route::resource('maison.type', MaisonTypeController::class)
+        ->only(['index', 'show', 'store','edit']); 
+    
     Route::resource('maison.zone_geographique', MaisonZoneGeographiqueController::class)
         ->only(['index', 'show','store','edit']);
 
@@ -60,12 +68,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::resource('material', MateriauxConstructionController::class)
         ->only(['index', 'show','store','edit']);
 
-})->missing(function (Request $request) {
-    return response()->json([
-        "message" => "url not found ".$request->fullUrl()
-     ],404);
+    })->missing(function (Request $request) {
+        return response()->json([
+            "message" => "url not found ".$request->fullUrl()
+        ],404);
 });
-
-    
-    //CertificationMaisonController
-// Route::resource('architectural/type', BailleurController::class)->middleware('auth:sanctum');
