@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\MaisonDimensionCollection;
 use App\Models\MaisonDimension;
 use Illuminate\Http\Request;
 
@@ -13,6 +14,13 @@ class MaisonDimensionController extends Controller
     public function index()
     {
         //
+        $data = MaisonDimension::all();
+        if($data->count() != 0 ){
+            return new MaisonDimensionCollection($data);
+        }
+        return response()->json([
+            "message"=>"Ressource not found",
+        ],400);
     }
 
     /**

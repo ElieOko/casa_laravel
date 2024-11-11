@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use Illuminate\Http\Request;
+use App\Http\Resources\ClientCollection;
 use Illuminate\Support\Facades\Validator;
 
 class ClientController extends Controller
@@ -14,6 +15,13 @@ class ClientController extends Controller
     public function index()
     {
         //
+        $data = Client::all();
+        if($data->count() != 0 ){
+            return new ClientCollection($data);
+        }
+        return response()->json([
+            "message"=>"Ressource not found",
+        ],400);
     }
 
     /**

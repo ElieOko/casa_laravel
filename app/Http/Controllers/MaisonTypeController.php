@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\MaisonTypeCollection;
 use App\Models\MaisonType;
 use Illuminate\Http\Request;
 
@@ -13,6 +14,13 @@ class MaisonTypeController extends Controller
     public function index()
     {
         //
+        $data = MaisonType::all();
+        if($data->count() != 0 ){
+            return new MaisonTypeCollection($data);
+        }
+        return response()->json([
+            "message"=>"Ressource not found",
+        ],400);
     }
 
     /**

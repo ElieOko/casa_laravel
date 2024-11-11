@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserSatisfactionCollection;
 use App\Models\UserSatisfaction;
 use Illuminate\Http\Request;
 
@@ -13,6 +14,13 @@ class UserSatisfactionController extends Controller
     public function index()
     {
         //
+        $data = UserSatisfaction::all();
+        if($data->count() != 0 ){
+            return new UserSatisfactionCollection($data);
+        }
+        return response()->json([
+            "message"=>"Ressource not found",
+        ],400);
     }
 
     /**

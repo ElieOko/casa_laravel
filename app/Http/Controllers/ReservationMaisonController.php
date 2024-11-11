@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ReservationMaisonCollection;
 use App\Models\ReservationMaison;
 use Illuminate\Http\Request;
 
@@ -13,6 +14,13 @@ class ReservationMaisonController extends Controller
     public function index()
     {
         //
+        $data = ReservationMaison::all();
+        if($data->count() != 0 ){
+            return new ReservationMaisonCollection($data);
+        }
+        return response()->json([
+            "message"=>"Ressource not found",
+        ],400);
     }
 
     /**

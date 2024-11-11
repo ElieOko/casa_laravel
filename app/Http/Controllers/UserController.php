@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Resources\UserCollection;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\BailleurController;
@@ -122,6 +123,16 @@ class UserController extends Controller
         ],200);
     }
 
+    public function index(){
+        $data = User::all();
+        if($data->count() != 0 ){
+            return new UserCollection($data);
+        }
+        return response()->json([
+            "message"=>"Ressource not found",
+        ],400);
+    }
+    
     public function desactive() {
         
     }

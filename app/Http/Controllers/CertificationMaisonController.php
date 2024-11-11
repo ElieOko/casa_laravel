@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CertificationMaisonCollection;
 use App\Models\CertificationMaison;
 use Illuminate\Http\Request;
 
@@ -13,6 +14,13 @@ class CertificationMaisonController extends Controller
     public function index()
     {
         //
+        $data = CertificationMaison::all();
+        if($data->count() != 0 ){
+            return new CertificationMaisonCollection($data);
+        }
+        return response()->json([
+            "message"=>"Ressource not found",
+        ],400);
     }
 
     /**

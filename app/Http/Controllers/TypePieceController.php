@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\TypePieceCollection;
 use App\Models\TypePiece;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,14 @@ class TypePieceController extends Controller
      */
     public function index()
     {
-        //
+        //User
+        $data = TypePiece::all();
+        if($data->count() != 0 ){
+            return new TypePieceCollection($data);
+        }
+        return response()->json([
+            "message"=>"Ressource not found",
+        ],400);
     }
 
     /**

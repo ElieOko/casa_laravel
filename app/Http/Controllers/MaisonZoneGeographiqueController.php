@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\MaisonZoneGeographiqueCollection;
 use App\Models\MaisonZoneGeographique;
 use Illuminate\Http\Request;
 
@@ -13,6 +14,13 @@ class MaisonZoneGeographiqueController extends Controller
     public function index()
     {
         //
+        $data = MaisonZoneGeographique::all();
+        if($data->count() != 0 ){
+            return new MaisonZoneGeographiqueCollection($data);
+        }
+        return response()->json([
+            "message"=>"Ressource not found",
+        ],400);
     }
 
     /**

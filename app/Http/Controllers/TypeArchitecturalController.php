@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\TypeArchitecturalCollection;
 use App\Models\TypeArchitectural;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,13 @@ class TypeArchitecturalController extends Controller
      */
     public function index()
     {
-        //
+        $data = TypeArchitectural::all();
+        if($data->count() != 0 ){
+            return new TypeArchitecturalCollection($data);
+        }
+        return response()->json([
+            "message"=>"Ressource not found",
+        ],400);
     }
 
     /**

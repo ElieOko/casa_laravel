@@ -2,25 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\UserType;
+use App\Models\Quartier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Http\Resources\UserTypeCollection;
 
-class UserTypeController extends Controller
+class QuartierController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data = UserType::all();
-        if($data->count() != 0 ){
-            return new UserTypeCollection($data);
-        }
-        return response()->json([
-            "message"=>"Ressource not found",
-        ],400);
+        //
     }
 
     /**
@@ -37,8 +30,7 @@ class UserTypeController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(),[
-            'nom' =>'required|unique:TUserTypes',
-            'description' => 'string'
+            'nom' =>'required|string',
         ]);
         if($validator->stopOnFirstFailure()->fails()){
             return response()->json([
@@ -46,20 +38,19 @@ class UserTypeController extends Controller
              ],402);
         }
         $field = $validator->validated();
-        $data = UserType::updateOrCreate([
-            'nom'    =>   $field['nom'],
-            'description'    =>   $field['description']
+        $data = Quartier::updateOrCreate([
+            'nom'    =>   $field['nom']
         ]);
         return response()->json([
-            'user_type' => $data,
-            'message' =>$this->msg_success,
-         ],$this->status_ok);
+            'quartier' => $data,
+            'message' =>'Enregistrement réussie avec succès',
+         ],200);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(UserType $userType)
+    public function show(Quartier $quartier)
     {
         //
     }
@@ -67,7 +58,7 @@ class UserTypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(UserType $userType)
+    public function edit(Quartier $quartier)
     {
         //
     }
@@ -75,7 +66,7 @@ class UserTypeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, UserType $userType)
+    public function update(Request $request, Quartier $quartier)
     {
         //
     }
@@ -83,7 +74,7 @@ class UserTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(UserType $userType)
+    public function destroy(Quartier $quartier)
     {
         //
     }

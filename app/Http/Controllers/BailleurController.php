@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Bailleur;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Resources\BailleurCollection;
 
 class BailleurController extends Controller
 {
@@ -14,6 +15,13 @@ class BailleurController extends Controller
     public function index()
     {
         //
+        $data = Bailleur::all();
+        if($data->count() != 0 ){
+            return new BailleurCollection($data);
+        }
+        return response()->json([
+            "message"=>"Ressource not found",
+        ],400);
     }
 
     /**

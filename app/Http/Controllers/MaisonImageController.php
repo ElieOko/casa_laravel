@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\MaisonImageCollection;
 use App\Models\MaisonImage;
 use Illuminate\Http\Request;
 
@@ -13,6 +14,13 @@ class MaisonImageController extends Controller
     public function index()
     {
         //
+        $data = MaisonImage::all();
+        if($data->count() != 0 ){
+            return new MaisonImageCollection($data);
+        }
+        return response()->json([
+            "message"=>"Ressource not found",
+        ],400);
     }
 
     /**

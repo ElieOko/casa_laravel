@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\MateriauxConstructionCollection;
 use App\Models\MateriauxConstruction;
 use Illuminate\Http\Request;
 
@@ -13,6 +14,13 @@ class MateriauxConstructionController extends Controller
     public function index()
     {
         //
+        $data = MateriauxConstruction::all();
+        if($data->count() != 0 ){
+            return new MateriauxConstructionCollection($data);
+        }
+        return response()->json([
+            "message"=>"Ressource not found",
+        ],400);
     }
 
     /**

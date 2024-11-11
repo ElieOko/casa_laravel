@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\MaisonTypePieceCollection;
-use App\Models\MaisonTypePiece;
+use App\Models\Satisfaction;
 use Illuminate\Http\Request;
 
-class MaisonTypePieceController extends Controller
+class SatisfactionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,13 +13,6 @@ class MaisonTypePieceController extends Controller
     public function index()
     {
         //
-        $data = MaisonTypePiece::all();
-        if($data->count() != 0 ){
-            return new MaisonTypePieceCollection($data);
-        }
-        return response()->json([
-            "message"=>"Ressource not found",
-        ],400);
     }
 
     /**
@@ -42,7 +34,7 @@ class MaisonTypePieceController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(MaisonTypePiece $maisonTypePiece)
+    public function show(Satisfaction $satisfaction)
     {
         //
     }
@@ -50,7 +42,7 @@ class MaisonTypePieceController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(MaisonTypePiece $maisonTypePiece)
+    public function edit(Satisfaction $satisfaction)
     {
         //
     }
@@ -58,7 +50,7 @@ class MaisonTypePieceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, MaisonTypePiece $maisonTypePiece)
+    public function update(Request $request, Satisfaction $satisfaction)
     {
         //
     }
@@ -66,7 +58,7 @@ class MaisonTypePieceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(MaisonTypePiece $maisonTypePiece)
+    public function destroy(Satisfaction $satisfaction)
     {
         //
     }

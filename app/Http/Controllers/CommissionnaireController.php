@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CommissionnaireCollection;
 use App\Models\Commissionnaire;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -14,6 +15,13 @@ class CommissionnaireController extends Controller
     public function index()
     {
         //
+        $data = Commissionnaire::all();
+        if($data->count() != 0 ){
+            return new CommissionnaireCollection($data);
+        }
+        return response()->json([
+            "message"=>"Ressource not found",
+        ],400);
     }
 
     /**
