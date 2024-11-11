@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('TMaisonImages', function (Blueprint $table) {
+        Schema::create('TDevises', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('maison_id')->nullable()->index();
-            $table->string("PictureName");
-            $table->string("PicturePath");
-            $table->string("PublicUrl");
-            $table->string("PictureOriginalName");
+            $table->text("nom");
+            $table->text("code");
+            $table->integer("taux")->default(0);
             $table->boolean("is_active")->default(true);
             $table->timestamps();
         });
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('TMaisonImages');
+        Schema::dropIfExists('TDevises');
     }
 };

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('TMateriauxConstructions', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
+            $table->boolean("is_active")->default(true);
             $table->timestamps();
         });
     }

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('telephone')->nullable();
             $table->string('image_profil')->nullable();
             $table->foreignId('user_id')->nullable()->index();
+            $table->boolean("is_active")->default(true);
             $table->timestamps();
         });
     }

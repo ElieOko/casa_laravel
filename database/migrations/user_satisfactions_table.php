@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->nullable()->index();
             $table->string('attente_satisfaction')->nullable();
+            $table->boolean("is_active")->default(true);
             $table->timestamps();
         });
     }

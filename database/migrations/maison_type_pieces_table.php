@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('type_piece_id')->nullable()->index();
             $table->integer('nombre_piece')->default(1);
             $table->string('dimension')->nullable();
+            $table->boolean("is_active")->default(true);
             $table->timestamps();
         });
     }

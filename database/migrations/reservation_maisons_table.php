@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string("heure_reserver")->default("");
             $table->string("plage_heure_debut")->default("");
             $table->string("plage_heure_fin")->default("");
+            $table->boolean("is_reserved")->default(false);
             $table->boolean("is_active")->default(false);
             $table->timestamps();
         });

@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('TUserTypes', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
+            $table->string('description')->default("");
+            $table->boolean("is_active")->default(true);
             $table->timestamps();
         });
     }

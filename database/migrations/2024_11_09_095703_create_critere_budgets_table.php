@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('TMaisonImages', function (Blueprint $table) {
+        Schema::create('critere_budgets', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('maison_id')->nullable()->index();
-            $table->string("PictureName");
-            $table->string("PicturePath");
-            $table->string("PublicUrl");
-            $table->string("PictureOriginalName");
-            $table->boolean("is_active")->default(true);
+            $table->integer("amountMin")->default(0);
+            $table->integer("amountMax")->default(0);
+            $table->foreignId('devise_id')->nullable()->index();
             $table->timestamps();
         });
     }
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('TMaisonImages');
+        Schema::dropIfExists('critere_budgets');
     }
 };

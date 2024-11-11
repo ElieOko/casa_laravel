@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('maison_id')->nullable()->index();
             $table->boolean('certified')->default(false);
+            $table->boolean("is_active")->default(true);
             $table->timestamps();
         });
     }

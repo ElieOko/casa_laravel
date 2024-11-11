@@ -11,16 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('TMaisonZoneGeographiques', function (Blueprint $table) {
+        Schema::create('TMaisonCriteres', function (Blueprint $table) {
             $table->id();
             $table->foreignId('maison_id')->nullable()->index();
-            $table->string('province')->nullable();
-            $table->string('ville');
-            $table->string('commune');
-            $table->string('avenue');
-            $table->string('quartier');
-            $table->string('latitude')->nullable();
-            $table->string('longitude')->nullable();
+            $table->foreignId('critere_id')->nullable()->index();
+            $table->string("note")->default("");
             $table->boolean("is_active")->default(true);
             $table->timestamps();
         });
@@ -31,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('TMaisonZoneGeographiques');
+        Schema::dropIfExists('TMaisonCriteres');
     }
 };

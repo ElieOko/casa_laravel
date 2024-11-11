@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('maison_id')->nullable()->index();
             $table->decimal('largeur',10,2);
             $table->decimal('longueur',10,2);
+            $table->boolean("is_active")->default(true);
             $table->timestamps();
         });
     }
