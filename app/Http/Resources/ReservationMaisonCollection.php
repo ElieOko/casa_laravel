@@ -12,7 +12,7 @@ class ReservationMaisonCollection extends ResourceCollection
      *
      * @return array<int|string, mixed>
      */
-    public static $wrap = "reservation";
+    public static $wrap = "reservations";
     public function toArray(Request $request)
     {
         return  $this->collection;

@@ -12,7 +12,7 @@ class BailleurCollection extends ResourceCollection
      *
      * @return array<int|string, mixed>
      */
-    public static $wrap = "bailleur";
+    public static $wrap = "bailleurs";
     public function toArray(Request $request)
     {
         return  $this->collection;

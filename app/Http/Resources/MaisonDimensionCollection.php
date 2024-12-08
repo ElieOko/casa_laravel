@@ -12,7 +12,7 @@ class MaisonDimensionCollection extends ResourceCollection
      *
      * @return array<int|string, mixed>
      */
-    public static $wrap = "maison_dimension";
+    public static $wrap = "maison_dimensions";
     public function toArray(Request $request)
     {
         return  $this->collection;

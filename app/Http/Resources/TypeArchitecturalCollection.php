@@ -12,7 +12,7 @@ class TypeArchitecturalCollection extends ResourceCollection
      *
      * @return array<int|string, mixed>
      */
-    public static $wrap = "architectural_type";
+    public static $wrap = "architectural_types";
     public function toArray(Request $request)
     {
         return  $this->collection;

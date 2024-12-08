@@ -12,7 +12,7 @@ class CertificationMaisonCollection extends ResourceCollection
      *
      * @return array<int|string, mixed>
      */
-    public static $wrap = "certification_maison";
+    public static $wrap = "certification_maisons";
     public function toArray(Request $request)
     {
         return  $this->collection;

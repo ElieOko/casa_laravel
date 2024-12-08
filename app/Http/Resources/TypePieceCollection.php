@@ -12,7 +12,7 @@ class TypePieceCollection extends ResourceCollection
      *
      * @return array<int|string, mixed>
      */
-    public static $wrap = "piece_type";
+    public static $wrap = "piece_types";
     public function toArray(Request $request)
     {
         return  $this->collection;

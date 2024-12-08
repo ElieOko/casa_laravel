@@ -12,7 +12,7 @@ class MaisonZoneGeographiqueCollection extends ResourceCollection
      *
      * @return array<int|string, mixed>
      */
-    public static $wrap = "maison_zone_geographique";
+    public static $wrap = "maison_zone_geographiques";
     public function toArray(Request $request)
     {
         return  $this->collection;

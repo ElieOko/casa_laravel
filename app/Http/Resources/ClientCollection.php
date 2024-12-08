@@ -12,7 +12,7 @@ class ClientCollection extends ResourceCollection
      *
      * @return array<int|string, mixed>
      */
-    public static $wrap = "client";
+    public static $wrap = "clients";
     public function toArray(Request $request)
     {
         return  $this->collection;

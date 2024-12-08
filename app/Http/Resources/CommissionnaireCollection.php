@@ -12,7 +12,7 @@ class CommissionnaireCollection extends ResourceCollection
      *
      * @return array<int|string, mixed>
      */
-    public static $wrap = "commissionnaire";
+    public static $wrap = "commissionnaires";
     public function toArray(Request $request)
     {
         return  $this->collection;

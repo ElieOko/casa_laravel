@@ -12,7 +12,7 @@ class MaisonTypeCollection extends ResourceCollection
      *
      * @return array<int|string, mixed>
      */
-    public static $wrap = "maison_type";
+    public static $wrap = "maison_types";
     public function toArray(Request $request)
     {
         return  $this->collection;

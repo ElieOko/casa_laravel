@@ -12,7 +12,7 @@ class MateriauxConstructionCollection extends ResourceCollection
      *
      * @return array<int|string, mixed>
      */
-    public static $wrap = "materiaux_construction";
+    public static $wrap = "materiaux_constructions";
     public function toArray(Request $request)
     {
         return  $this->collection;

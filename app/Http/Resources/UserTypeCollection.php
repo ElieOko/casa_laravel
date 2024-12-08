@@ -12,7 +12,7 @@ class UserTypeCollection extends ResourceCollection
      *
      * @return array<int|string, mixed>
      */
-    public static $wrap = "user_type";
+    public static $wrap = "user_types";
     public function toArray(Request $request)
     {
         return  $this->collection;

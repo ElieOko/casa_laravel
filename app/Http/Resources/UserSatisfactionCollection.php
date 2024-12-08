@@ -12,7 +12,7 @@ class UserSatisfactionCollection extends ResourceCollection
      *
      * @return array<int|string, mixed>
      */
-    public static $wrap = "user_satifaction";
+    public static $wrap = "user_satifactions";
     public function toArray(Request $request)
     {
         return  $this->collection;
