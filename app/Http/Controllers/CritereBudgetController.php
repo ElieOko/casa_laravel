@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\CritereBudget;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\CritereBudgetCollection;
 
 class CritereBudgetController extends Controller
@@ -21,6 +22,7 @@ class CritereBudgetController extends Controller
         return response()->json([
             "message"=>"Ressource not found",
         ],400);
+        
     }
 
     /**
@@ -47,7 +49,7 @@ class CritereBudgetController extends Controller
              ],402);
         }
         $field = $validator->validated();
-        $data = MaisonDimension::updateOrCreate([
+        $data = CritereBudget::updateOrCreate([
             'devise_id'     => $field['devise_id'],
             'amountMin'       => $field['amountMin'],
             'amountMax'      => $field['amountMax']

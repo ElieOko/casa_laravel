@@ -45,7 +45,7 @@ class CommissionnaireController extends Controller
             'prenom' => 'required|string',
             'genre' => 'required|string',
             'telephone' => 'string',
-            'date_naissance' => 'string',
+            'date_naissance' => 'date',
             'user_id' => 'int'
         ]);
 

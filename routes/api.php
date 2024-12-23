@@ -6,27 +6,33 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\MaisonController;
 use App\Http\Controllers\BailleurController;
+use App\Http\Controllers\UserTypeController;
 use App\Http\Controllers\TypePieceController;
+use App\Http\Controllers\MaisonTypeController;
+use App\Http\Controllers\CritereBudgetController;
 use App\Http\Controllers\CommissionnaireController;
 use App\Http\Controllers\MaisonDimensionController;
 use App\Http\Controllers\UserSatisfactionController;
 use App\Http\Controllers\ReservationMaisonController;
 use App\Http\Controllers\TypeArchitecturalController;
 use App\Http\Controllers\CertificationMaisonController;
-use App\Http\Controllers\MaisonTypeController;
 use App\Http\Controllers\MateriauxConstructionController;
 use App\Http\Controllers\MaisonZoneGeographiqueController;
-use App\Http\Controllers\UserTypeController;
 
 Route::get('bailleur/desactive', [BailleurController::class, 'desactive']);
 Route::post('user/register', [UserController::class, 'register']);
 Route::post('user/login', [UserController::class, 'login']);
 Route::post('user/type', [UserTypeController::class, 'store']);
 Route::get('user', [UserController::class, 'index']);
+
+Route::resource('critere/budget', CritereBudgetController::class)
+->only(['index', 'show','edit','store']);
+
 Route::middleware(['auth:sanctum'])->group(function () {
     // Route::get('user', [UserController::class, 'index']);
     // Route::resource('user', UserController::class)
     //     ->only(['index']);
+
 
     Route::resource('bailleur', BailleurController::class)
         ->only(['index', 'show','edit']);
