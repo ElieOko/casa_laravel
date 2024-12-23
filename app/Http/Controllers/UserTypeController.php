@@ -48,7 +48,7 @@ class UserTypeController extends Controller
         $field = $validator->validated();
         $data = UserType::updateOrCreate([
             'nom'    =>   $field['nom'],
-            'description'    =>   $field['description']
+            'description'    =>   $field['description']??""
         ]);
         return response()->json([
             'user_type' => $data,

@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CritereBudget;
 use Illuminate\Http\Request;
+use App\Models\CritereBudget;
+use App\Http\Resources\CritereBudgetCollection;
 
 class CritereBudgetController extends Controller
 {
@@ -13,6 +14,13 @@ class CritereBudgetController extends Controller
     public function index()
     {
         //
+        $data = CritereBudget::all();
+        if($data->count() != 0 ){
+            return new CritereBudgetCollection($data);
+        }
+        return response()->json([
+            "message"=>"Ressource not found",
+        ],400);
     }
 
     /**
@@ -28,7 +36,26 @@ class CritereBudgetController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'devise_id' =>'int',
+            'amountMin' =>'int',
+            'amountMax'=>'int'
+        ]);
+        if($validator->stopOnFirstFailure()->fails()){
+            return response()->json([
+                'message' => $validator
+             ],402);
+        }
+        $field = $validator->validated();
+        $data = MaisonDimension::updateOrCreate([
+            'devise_id'     => $field['devise_id'],
+            'amountMin'       => $field['amountMin'],
+            'amountMax'      => $field['amountMax']
+        ]);
+        return response()->json([
+            'critere_budget' => $data,
+            'message' =>$this->msg_success,
+         ],200);
     }
 
     /**

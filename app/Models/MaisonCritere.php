@@ -10,6 +10,9 @@ class MaisonCritere extends Model
     use HasFactory;
     protected $table = "TMaisonCriteres";
     protected $fillable = [
-        'nom'
+        'maison_id',
+        'critere_id',
+        'note',
+        'is_active'
     ];
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Province;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Resources\ProvinceCollection;
 
 class ProvinceController extends Controller
 {
@@ -13,7 +14,13 @@ class ProvinceController extends Controller
      */
     public function index()
     {
-        //
+        $data = Province::all();
+        if($data->count() != 0 ){
+            return new ProvinceCollection($data);
+        }
+        return response()->json([
+            "message"=>"Ressource not found",
+        ],400);
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Country;
 use Illuminate\Http\Request;
+use App\Http\Resources\CountryCollection;
 use Illuminate\Support\Facades\Validator;
 
 class CountryController extends Controller
@@ -14,6 +15,13 @@ class CountryController extends Controller
     public function index()
     {
         //
+        $data = Country::all();
+        if($data->count() != 0 ){
+            return new CountryCollection($data);
+        }
+        return response()->json([
+            "message"=>"Ressource not found",
+        ],400);
     }
 
     /**

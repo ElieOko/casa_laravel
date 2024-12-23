@@ -36,7 +36,33 @@ class ReservationMaisonController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //f
+        $validator = Validator::make($request->all(),[
+            'maison_id'  =>'int',
+            'user_id' =>'int',
+            'date_reservation'=>'string',
+            'heure_reserver' =>'string',
+            'plage_heure_debut' => 'string',
+            'plage_heure_fin' => 'string'
+        ]);
+        if($validator->stopOnFirstFailure()->fails()){
+            return response()->json([
+                'message' => $validator
+             ],402);
+        }
+        $field = $validator->validated();
+        $data = ReservationMaison::updateOrCreate([
+            'maison_id'             => $field['maison_id'],
+            'user_id'               => $field['user_id'],
+            'date_reservation'      => $field['date_reservation'],
+            'heure_reserver'        => $field['heure_reserver'],
+            'plage_heure_debut'     => $field['plage_heure_debut'],
+            'plage_heure_fin'       => $field['plage_heure_fin'],
+        ]);
+        return response()->json([
+            'reservation_   maison' => $data,
+            'message' =>$this->msg_success,
+         ],200);
     }
 
     /**

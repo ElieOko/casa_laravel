@@ -36,7 +36,26 @@ class MaisonDimensionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'maison_id' =>'required|unique:TMaisonDimensions',
+            'largeur' =>'float',
+            'longueur'=>'float'
+        ]);
+        if($validator->stopOnFirstFailure()->fails()){
+            return response()->json([
+                'message' => $validator
+             ],402);
+        }
+        $field = $validator->validated();
+        $data = MaisonDimension::updateOrCreate([
+            'maison_id'     => $field['maison_id'],
+            'largeur'       => $field['largeur'],
+            'longueur'      => $field['longueur']
+        ]);
+        return response()->json([
+            'maison_dimension' => $data,
+            'message' =>$this->msg_success,
+         ],200);
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Devise;
 use Illuminate\Http\Request;
+use App\Http\Resources\DeviseCollection;
 use Illuminate\Support\Facades\Validator;
 
 class DeviseController extends Controller
@@ -13,7 +14,13 @@ class DeviseController extends Controller
      */
     public function index()
     {
-        //
+        $data = Devise::all();
+        if($data->count() != 0 ){
+            return new DeviseCollection($data);
+        }
+        return response()->json([
+            "message"=>"Ressource not found",
+        ],400);
     }
 
     /**

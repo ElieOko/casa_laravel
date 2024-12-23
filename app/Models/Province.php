@@ -19,6 +19,11 @@ class Province extends Model
     {
         return $this->belongsTo(Country::class,'country_id','id');
     }
+    public function maison_zone_geographique(): HasMany
+    {
+        return $this->hasMany(MaisonZoneGeographique::class);
+    }
+    
     public function ville(): HasMany
     {
         return $this->hasMany(Ville::class);

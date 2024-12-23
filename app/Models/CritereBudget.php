@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class CritereBudget extends Model
 {
     use HasFactory;
+    protected $table = "TCritereBudgets";
+    protected $fillable = [
+        'amountMin',
+        'amountMax',
+        'devise_id'
+    ];
 }

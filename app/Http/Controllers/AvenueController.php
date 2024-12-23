@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Avenue;
 use Illuminate\Http\Request;
+use App\Http\Resources\AvenueCollection;
 use Illuminate\Support\Facades\Validator;
 
 class AvenueController extends Controller
@@ -14,6 +15,13 @@ class AvenueController extends Controller
     public function index()
     {
         //
+        $data = Avenue::all();
+        if($data->count() != 0 ){
+            return new AvenueCollection($data);
+        }
+        return response()->json([
+            "message"=>"Ressource not found",
+        ],400);
     }
 
     /**

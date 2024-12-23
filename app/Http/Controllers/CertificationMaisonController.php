@@ -36,7 +36,24 @@ class CertificationMaisonController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'maison_id' =>'required|unique:TCertificationMaisons',
+            'certified' =>'boolean'
+        ]);
+        if($validator->stopOnFirstFailure()->fails()){
+            return response()->json([
+                'message' => $validator
+             ],402);
+        }
+        $field = $validator->validated();
+        $data = CertificationMaison::updateOrCreate([
+            'maison_id' => $field['maison_id'],
+            'certified' => $field['certified']
+        ]);
+        return response()->json([
+            'maison_certified' => $data,
+            'message' =>$this->msg_success,
+         ],200);
     }
 
     /**

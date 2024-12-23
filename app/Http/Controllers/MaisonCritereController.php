@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MaisonCritere;
 use Illuminate\Http\Request;
+use App\Models\MaisonCritere;
+use App\Http\Resources\MaisonCritereCollection;
 
 class MaisonCritereController extends Controller
 {
@@ -13,6 +14,13 @@ class MaisonCritereController extends Controller
     public function index()
     {
         //
+        $data = MaisonCritere::all();
+        if($data->count() != 0 ){
+            return new MaisonCritereCollection($data);
+        }
+        return response()->json([
+            "message"=>"Ressource not found",
+        ],400);
     }
 
     /**
@@ -29,6 +37,26 @@ class MaisonCritereController extends Controller
     public function store(Request $request)
     {
         //
+        $validator = Validator::make($request->all(),[
+            'maison_id'  =>'int',
+            'critere_id' =>'int',
+            'note'       =>'string'
+        ]);
+        if($validator->stopOnFirstFailure()->fails()){
+            return response()->json([
+                'message' => $validator
+             ],402);
+        }
+        $field = $validator->validated();
+        $data = MaisonCritere::updateOrCreate([
+            'maison_id'     => $field['maison_id'],
+            'critere_id'    => $field['critere_id'],
+            'note'          => $field['note']??''
+        ]);
+        return response()->json([
+            'maison_critere' => $data,
+            'message' =>$this->msg_success,
+         ],200);
     }
 
     /**

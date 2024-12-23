@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Commune;
 use Illuminate\Http\Request;
+use App\Http\Resources\CommuneCollection;
 use Illuminate\Support\Facades\Validator;
 
 class CommuneController extends Controller
@@ -13,7 +14,13 @@ class CommuneController extends Controller
      */
     public function index()
     {
-        //
+        $data = Commune::all();
+        if($data->count() != 0 ){
+            return new CommuneCollection($data);
+        }
+        return response()->json([
+            "message"=>"Ressource not found",
+        ],400);
     }
 
     /**
@@ -42,7 +49,7 @@ class CommuneController extends Controller
             'nom'    =>   $field['nom'],
         ]);
         return response()->json([
-            'country' => $data,
+            'commune' => $data,
             'message' =>$this->msg_success,
          ],200);
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Critere;
 use Illuminate\Http\Request;
+use App\Http\Resources\CritereCollection;
 
 class CritereController extends Controller
 {
@@ -12,7 +13,13 @@ class CritereController extends Controller
      */
     public function index()
     {
-        //
+        $data = Critere::all();
+        if($data->count() != 0 ){
+            return new CritereCollection($data);
+        }
+        return response()->json([
+            "message"=>"Ressource not found",
+        ],400);
     }
 
     /**
@@ -28,7 +35,22 @@ class CritereController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'nom' =>'required|unique:TCriteres',
+        ]);
+        if($validator->stopOnFirstFailure()->fails()){
+            return response()->json([
+                'message' => $validator
+             ],402);
+        }
+        $field = $validator->validated();
+        $data = Critere::updateOrCreate([
+            'nom'    =>   $field['nom']
+        ]);
+        return response()->json([
+            'critere' => $data,
+            'message' => $this->msg_success,
+         ],$this->status_ok);
     }
 
     /**

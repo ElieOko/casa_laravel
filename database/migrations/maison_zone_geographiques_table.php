@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('TMaisonZoneGeographiques', function (Blueprint $table) {
             $table->id();
             $table->foreignId('maison_id')->nullable()->index();
-            $table->string('province')->nullable();
-            $table->string('ville');
-            $table->string('commune');
+            $table->foreignId('province_id')->nullable()->index();
+            $table->foreignId('ville_id')->nullable()->index();          
+            $table->string('commune')->nullable();
             $table->string('avenue');
             $table->string('quartier');
             $table->string('latitude')->nullable();

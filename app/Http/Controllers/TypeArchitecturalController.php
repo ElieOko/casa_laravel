@@ -36,6 +36,22 @@ class TypeArchitecturalController extends Controller
     public function store(Request $request)
     {
         //
+        $validator = Validator::make($request->all(),[
+            'nom' =>'required|unique:TCommunes',
+        ]);
+        if($validator->stopOnFirstFailure()->fails()){
+            return response()->json([
+                'message' => $validator
+             ],402);
+        }
+        $field = $validator->validated();
+        $data = TypeArchitectural::updateOrCreate([
+            'nom'    =>   $field['nom'],
+        ]);
+        return response()->json([
+            'type_architectural' => $data,
+            'message' =>$this->msg_success,
+         ],200);
     }
 
     /**

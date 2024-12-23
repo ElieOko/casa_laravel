@@ -36,7 +36,24 @@ class TypePieceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'nom' =>'required|unique:TTypePieces',
+            'description'=>'string'
+        ]);
+        if($validator->stopOnFirstFailure()->fails()){
+            return response()->json([
+                'message' => $validator
+             ],402);
+        }
+        $field = $validator->validated();
+        $data = TypePiece::updateOrCreate([
+            'nom'           =>   $field['nom'],
+            'description'   =>   $field['description']??""
+        ]);
+        return response()->json([
+            'type_piece' => $data,
+            'message' =>$this->msg_success,
+         ],200);
     }
 
     /**

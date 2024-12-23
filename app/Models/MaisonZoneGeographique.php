@@ -13,8 +13,8 @@ class MaisonZoneGeographique extends Model
     protected $table = "TMaisonZoneGeographiques";
     protected $fillable = [
         'maison_id',
-        'province',
-        'ville',
+        'province_id',
+        'ville_id',
         'commune',
         'avenue',
         'quartier',
@@ -24,5 +24,13 @@ class MaisonZoneGeographique extends Model
     public function maison() : BelongsTo
     {
         return $this->belongsTo(Maison::class,'maison_id','id');
+    }
+    public function province() : BelongsTo
+    {
+        return $this->belongsTo(Maison::class,'province_id','id');
+    }
+    public function ville() : BelongsTo
+    {
+        return $this->belongsTo(Maison::class,'ville_id','id');
     }
 }

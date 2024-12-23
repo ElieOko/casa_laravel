@@ -23,4 +23,8 @@ class Ville extends Model
     {
         return $this->hasMany(Commune::class);
     }
+    public function maison_zone_geographique(): HasMany
+    {
+        return $this->hasMany(MaisonZoneGeographique::class);
+    }
 }

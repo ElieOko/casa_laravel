@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Quartier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Resources\QuartierCollection;
 
 class QuartierController extends Controller
 {
@@ -13,7 +14,13 @@ class QuartierController extends Controller
      */
     public function index()
     {
-        //
+        $data = Quartier::all();
+        if($data->count() != 0 ){
+            return new QuartierCollection($data);
+        }
+        return response()->json([
+            "message"=>"Ressource not found",
+        ],400);
     }
 
     /**

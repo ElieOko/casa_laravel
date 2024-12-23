@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('critere_budgets', function (Blueprint $table) {
+        Schema::create('TCritereBudgets', function (Blueprint $table) {
             $table->id();
             $table->integer("amountMin")->default(0);
             $table->integer("amountMax")->default(0);
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('critere_budgets');
+        Schema::dropIfExists('TCritereBudgets');
     }
 };

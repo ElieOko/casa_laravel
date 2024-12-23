@@ -36,7 +36,36 @@ class MaisonZoneGeographiqueController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'maison_id'     =>'int',
+            'province_id'   =>'int',
+            'ville_id'      =>'int',
+            'commune'       => 'string',
+            'avenue'        => 'string',
+            'quartier'      => 'string',
+            'latitude'      => 'string',
+            'longitude'     => 'string'
+        ]);
+        if($validator->stopOnFirstFailure()->fails()){
+            return response()->json([
+                'message' => $validator
+             ],402);
+        }
+        $field = $validator->validated();
+        $data = MaisonDimension::updateOrCreate([
+            'maison_id'     => $field['maison_id'],
+            'province_id'   => $field['province_id'],
+            'ville_id'      => $field['ville_id'],
+            'commune'       => $field['commune'],
+            'avenue'        => $field['avenue'],
+            'quartier'      => $field['quartier'],
+            'latitude'      => $field['latitude'],
+            'longitude'     => $field['longitude']
+        ]);
+        return response()->json([
+            'maison_zone_geographique' => $data,
+            'message' =>$this->msg_success,
+         ],200);
     }
 
     /**
