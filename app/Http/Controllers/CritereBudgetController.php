@@ -15,7 +15,7 @@ class CritereBudgetController extends Controller
     public function index()
     {
         //
-        $data = CritereBudget::with("devise")->orderBy('id', 'desc')->get();;
+        $data = CritereBudget::with("devise")->orderBy('id', 'asc')->get();;
         if($data->count() != 0 ){
             return new CritereBudgetCollection($data);
         }
