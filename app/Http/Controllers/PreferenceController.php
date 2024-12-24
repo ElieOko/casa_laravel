@@ -16,6 +16,14 @@ class PreferenceController extends Controller
     public function index()
     {
         //
+        $critere_budget = (new CritereBudgetController())->index();
+        $type_piece = (new TypePieceController())->index();
+        $type_maison = (new MaisonTypeController)->index();
+        return response()->json([
+           "critere_budgets"    => $critere_budget,
+           "type_pieces"        => $type_piece,
+           "type_maison"        => $type_maison
+        ],200);
     }
 
     /**
@@ -32,9 +40,6 @@ class PreferenceController extends Controller
     public function store(Request $request)
     {
         //
-        $critere_budget = (new CritereBudgetController())->index();
-        $type_piece = (new TypePieceController())->index();
-        $type_maison = (new MaisonTypeController)->index();
     }
 
     /**
