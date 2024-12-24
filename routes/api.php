@@ -9,6 +9,7 @@ use App\Http\Controllers\BailleurController;
 use App\Http\Controllers\UserTypeController;
 use App\Http\Controllers\TypePieceController;
 use App\Http\Controllers\MaisonTypeController;
+use App\Http\Controllers\PreferenceController;
 use App\Http\Controllers\CritereBudgetController;
 use App\Http\Controllers\CommissionnaireController;
 use App\Http\Controllers\MaisonDimensionController;
@@ -26,6 +27,9 @@ Route::post('user/type', [UserTypeController::class, 'store']);
 Route::get('user', [UserController::class, 'index']);
 
 Route::resource('critere/budget', CritereBudgetController::class)
+->only(['index', 'show','edit','store']);
+
+Route::resource('preference', PreferenceController::class)
 ->only(['index', 'show','edit','store']);
 
 Route::middleware(['auth:sanctum'])->group(function () {
