@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Devise;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class CritereBudget extends Model
 {
@@ -14,4 +16,8 @@ class CritereBudget extends Model
         'amountMax',
         'devise_id'
     ];
+    public function devise() : BelongsTo
+    {
+        return $this->belongsTo(Devise::class,'devise_id','id');
+    }
 }
