@@ -22,7 +22,7 @@ class UserController extends Controller
         ]);
         if($validator->stopOnFirstFailure()->fails()){
             return response()->json([
-                'message' => $validator
+                'message' => $validator->error()
              ],402);
         }
         $field = $validator->validated();
@@ -50,17 +50,16 @@ class UserController extends Controller
         $data["sys"] ="User System";
         $account = "User Sytem";
         $validator = Validator::make($request->all(),[
-            'username' =>'required|string',
-            'password' => 'required|string',
-            'email'=>'string',
+            'username' =>'required|unique:TUsers',
+            'password' => 'required|min:6',
+            'email'=>'required|unique:TUsers',
             'user_type_id'=>'required|int'
         ]);
         if($validator->stopOnFirstFailure()->fails()){
             return response()->json([
-                'message' => $validator,
+                'message' => $validator->errors(),
              ],403);
         }
-        
         $field = $validator->validated();
         $user = User::updateOrCreate([
             'username'    =>   $field['username'],
@@ -68,6 +67,7 @@ class UserController extends Controller
             'email'       =>   $field['email']??"",
             'user_type_id'=>   $field['user_type_id']
         ]);
+
         $token = $user->createToken('token')->plainTextToken;
         //bailleur
         if($field['user_type_id'] == 2){
@@ -81,7 +81,7 @@ class UserController extends Controller
             } 
             $account =  "Compte Bailleur";
         }
-        //commissionnaire
+            //commissionnaire
         elseif ($field['user_type_id'] == 3) {
             $request->merge(['user_id' => $user->id]);
             $data = (new CommissionnaireController())->store($request);
@@ -93,7 +93,7 @@ class UserController extends Controller
             } 
             $account =  "Compte Commissionnaire";
         }
-        //client
+            //client
         elseif ($field['user_type_id'] == 4) {
             $request->merge(['user_id' => $user->id]);
             $data = (new ClientController())->store($request);
@@ -101,25 +101,33 @@ class UserController extends Controller
                 User::destroy($user->id);
                 return response()->json([
                     "message"=> $data['error']
-                ],422);
+                    ],422);
             }
             $account =  "Compte Client";
         }
-        //user_system
+            //user_system
         else{
-            return response()->json([
-                'user' => $user,
-                'token'=> $token,
-                'account' => $account
-             ],200);
+            if($field['user_type_id'] != 1){
+                User::destroy($user->id);
+                return response()->json([
+                    'message' => $this->msg_account_invalid
+                ],200);
+            }
+            else{
+                return response()->json([
+                    'user' => $user,
+                    'token'=> $token,
+                    'account' => $account
+                ],200);
+            }  
         }
-        
+
         return response()->json([
-           'message' =>'Votre compte a été créer avec succès',
-           'data' => $data['sys'],
-           'user' => $user,
-           'token'=> $token,
-           'account' => $account
+            'message' =>'Votre compte a été créer avec succès',
+            'data' => $data['sys'],
+            'user' => $user,
+            'token'=> $token,
+            'account' => $account
         ],200);
     }
 

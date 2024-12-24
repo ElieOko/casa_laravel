@@ -13,5 +13,6 @@ class Devise extends Model
         'nom',
         'code',
         'taux',
+        'symbole'
     ];
 }

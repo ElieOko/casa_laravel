@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->text("nom");
             $table->text("code");
+            $table->text("symbole");
             $table->integer("taux")->default(0);
             $table->boolean("is_active")->default(true);
             $table->timestamps();

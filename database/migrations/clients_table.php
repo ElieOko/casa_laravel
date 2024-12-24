@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nom_famille');
             $table->string('prenom');
             $table->string('genre');
-            $table->date('date_naissance');
+            $table->date('date_naissance')->nullable();
             $table->string('telephone')->nullable();
             $table->string('image_profil')->nullable();
             $table->foreignId('user_id')->nullable()->index();

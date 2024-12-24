@@ -43,8 +43,8 @@ class ClientController extends Controller
             'nom_famille' => 'required|string',
             'prenom' => 'required|string',
             'genre' => 'required|string',
-            'telephone' => 'string',
-            'date_naissance' => 'string',
+            'telephone' => 'string|min:8|regex:/^[0-9]+$/',
+            'date_naissance' => 'date',
             'user_id' => 'int'
         ]);
 
