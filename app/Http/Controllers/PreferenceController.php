@@ -52,6 +52,18 @@ class PreferenceController extends Controller
              ],402);
         }
         $field = $validator->validated();
+        $state = Preference::updateOrCreate([
+            'user_id'           =>1,
+            'critere_id'        =>$field['critere_id'],
+            'type_maison_id'    =>$field['type_maison_id'],
+        ]);
+        
+        if($state){
+            return response()->json([
+                'message' => $this->msg_success
+             ],200);
+        }
+
     }
 
     /**
