@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Preference;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\TypePieceController;
 use App\Http\Controllers\MaisonTypeController;
 use App\Http\Controllers\CritereBudgetController;
@@ -40,6 +41,17 @@ class PreferenceController extends Controller
     public function store(Request $request)
     {
         //
+        $validator = Validator::make($request->all(),[
+            'critere_id'        =>  'required|int',
+            'type_maison_id'    =>  'required|int',
+            'piece.*.id'        =>  'required|int'
+        ]);
+        if($validator->stopOnFirstFailure()->fails()){
+            return response()->json([
+                'message' => $validator->errors()
+             ],402);
+        }
+        $field = $validator->validated();
     }
 
     /**
